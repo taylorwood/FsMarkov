@@ -6,9 +6,16 @@
 open FsMarkov
 open FsMarkov.MarkovText
 
-let map = getWordPairs 3 "/Users/Taylor/Projects/Raw Text/Picture of Dorian Gray.txt" |> buildMarkovMap
-let builder = MarkovTextBuilder(map)
+// try different values of n
+let nGramSize = 3
 
-builder.GenerateSentences 3
+// get a sequence of n-grams from a text file
+let nGrams = getWordPairs nGramSize "/Users/Taylor/Projects/Raw Text/Picture of Dorian Gray.txt"
+// build the Markov string transition map
+let map = buildMarkovMap nGrams
+
+// print a few sentences out
+let generator = MarkovTextBuilder(map)
+generator.GenerateSentences 3
 |> joinWords
 |> printfn "%A"
