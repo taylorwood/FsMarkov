@@ -6,8 +6,8 @@ open System.Text.RegularExpressions
 
 module MarkovText = 
     /// Picks a random item from a sequence.
-    let getRandomItem (rng : Random) seq = 
-        let randIndex = rng.Next(Seq.length seq)
+    let getRandomItem (rng : int -> int) seq = 
+        let randIndex = rng (Seq.length seq)
         seq |> Seq.nth randIndex
     
     /// Splits a string by whitespace into a string array

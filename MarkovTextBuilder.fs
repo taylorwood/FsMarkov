@@ -5,8 +5,8 @@ open System.Text.RegularExpressions
 open FsMarkov.MarkovText
 
 /// Generates Markov sentences using a map of Markov string transitions.
-type MarkovTextBuilder(map : Map<string, string list>, ?rng, ?isStartWord, ?isEndWord) = 
-    let rng = defaultArg rng (Random())
+type MarkovTextBuilder(map : Map<string, string list>, ?rng : int -> int, ?isStartWord, ?isEndWord) = 
+    let rng = defaultArg rng (Random().Next)
     // determines if an n-gram can be used as the beginning of a sentence
     let isStartSentence = defaultArg isStartWord (Regex(@"^[A-Z]").IsMatch)
     // determines if an n-gram can be used as the end of a sentence
