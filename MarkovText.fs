@@ -32,7 +32,7 @@ module MarkovText =
     /// but the last, joined as a single string. The second item is the last word
     /// in the array.
     let bisectWords (arr : _ []) = 
-        let len = Array.length arr
+        let len = arr.Length
         let preds = arr |> Seq.take (len - 1)
         (preds |> joinWords, arr.[len - 1])
     
