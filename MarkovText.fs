@@ -1,7 +1,6 @@
 ﻿namespace FsMarkov
 
 open System
-open System.IO
 open System.Text.RegularExpressions
 
 module MarkovText = 
@@ -23,10 +22,7 @@ module MarkovText =
         |> joinWords
     
     /// Reads a sequence of n-grams from a text file.
-    let getWordPairs pairSize filePath = 
-        File.ReadAllText filePath
-        |> splitOnSpace
-        |> Seq.windowed pairSize
+    let getWordPairs pairSize = splitOnSpace >> Seq.windowed pairSize
     
     /// Returns a string tuple from a string array. The first item is every word
     /// but the last, joined as a single string. The second item is the last word

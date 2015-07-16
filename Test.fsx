@@ -3,19 +3,20 @@
 #load "MarkovText.fs"
 #load "MarkovTextBuilder.fs"
 
+open System.IO
 open FsMarkov
 open FsMarkov.MarkovText
 
 // try different values of n
 let nGramSize = 3
-
 // get a sequence of n-grams from a text file
-let nGrams = getWordPairs nGramSize "/Users/Taylor/Projects/Raw Text/Picture of Dorian Gray.txt"
+let corpus = File.ReadAllText "/Users/Taylor/Projects/Raw Text/Picture of Dorian Gray.txt"
+let nGrams = getWordPairs nGramSize corpus
 // build the Markov string transition map
 let map = buildMarkovMap nGrams
+let generator = MarkovTextBuilder(map)
 
 // print a few sentences out
-let generator = MarkovTextBuilder(map)
 generator.GenerateSentences 3
 |> joinWords
 |> printfn "%A"
