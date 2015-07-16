@@ -8,9 +8,9 @@ open FsMarkov.MarkovText
 type MarkovTextBuilder(map : Map<string, string list>, ?rng : int -> int, ?isStartWord, ?isEndWord) = 
     let rng = defaultArg rng (Random().Next)
     // determines if an n-gram can be used as the beginning of a sentence
-    let isStartSentence = defaultArg isStartWord (Regex(@"^[A-Z]").IsMatch)
+    let isStartSentence = defaultArg isStartWord (Regex(@"^""?[A-Z]").IsMatch)
     // determines if an n-gram can be used as the end of a sentence
-    let isEndSentence = defaultArg isEndWord (Regex(@"(?<!Mr(s)?)[\.\?\!]$").IsMatch)
+    let isEndSentence = defaultArg isEndWord (Regex(@"(?<!Mr(s)?)[\.\?\!]""?$").IsMatch)
     // partition n-grams into "sentence starters" and everything else
     let startWords, otherWords = map |> Map.partition (fun k _ -> isStartSentence k)
     
