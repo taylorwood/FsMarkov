@@ -7,7 +7,7 @@ module MarkovText =
     /// Picks a random item from a sequence.
     let getRandomItem (rng : int -> int) seq = 
         let randIndex = rng (Seq.length seq)
-        seq |> Seq.nth randIndex
+        seq |> Seq.item randIndex
     
     /// Splits a string by whitespace into a string array
     let splitOnSpace text = Regex.Split(text, @"\s+")
